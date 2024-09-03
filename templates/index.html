@@ -1,0 +1,163 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phần Mềm Chữ Ký Số</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Phần Mềm Chữ Ký Số RSA</h1>
+      <div class="row">
+        <!-- Phần Khóa -->
+        <div class="column-key">
+          <div>
+            <h2>Khóa</h2>
+            <form action="/generate_keys" method="POST">
+              <label for="keySize" class="label-key-size"
+                >Chọn kích thước khóa:</label
+              >
+              <select id="keySize" class="select-key-size">
+                <option value="512">512-bit</option>
+                <option value="1024">1024-bit</option>
+                <option value="2048">2048-bit</option>
+                <option value="4096">4096-bit</option>
+              </select>
+              <button type="submit">Tạo Khóa</button>
+            </form>
+          </div>
+          <div>
+            <h3>Giá trị p:</h3>
+            <textarea readonly>{{ p }}</textarea>
+          </div>
+          <div>
+            <h3>Giá trị q:</h3>
+            <textarea readonly>{{ q }}</textarea>
+          </div>
+          <div>
+            <h3>Khóa Bí Mật:</h3>
+            <textarea readonly>{{ private_key }}</textarea>
+          </div>
+          <div>
+            <h3>Khóa Công Khai:</h3>
+            <textarea readonly>{{ public_key }}</textarea>
+          </div>
+        </div>
+      </div>
+      <h1>Xác thực</h1>
+      <div class="row">
+        <!-- Phần Người Gửi -->
+        <div class="column" style="background-color: #ccff90">
+          <h2>Người gửi tạo chữ kí</h2>
+          <div>
+            <h3>Khóa Bí Mật:</h3>
+            <textarea readonly>{{ private_key }}</textarea>
+          </div>
+          <form action="/sign" method="POST" enctype="multipart/form-data">
+            <label for="message">Thông Điệp:</label>
+            <textarea id="message" name="message"></textarea>
+            <label for="file">Hoặc tải lên tệp:</label>
+            <input type="file" name="file" id="file" />
+            <button type="submit">Tạo Chữ Ký</button>
+          </form>
+          <div>
+            <h3>Mã Băm</h3>
+            <textarea readonly>{{ message_hash }}</textarea>
+          </div>
+          <div>
+            <h3>Chữ Ký Đã Tạo:</h3>
+            <textarea readonly>{{ signature }}</textarea>
+            <a href="/download/signature.txt" class="download-icon">
+              <i class="fas fa-download"></i> Tải Chữ Ký
+            </a>
+          </div>
+        </div>
+
+        <!-- Phần Người Nhận -->
+        <div class="column" style="background-color: #a7ffeb">
+          <h2>Người nhận xác thực</h2>
+          <div>
+            <h3>Khóa Công Khai:</h3>
+            <textarea readonly>{{ public_key }}</textarea>
+          </div>
+          <form action="/verify" method="POST" enctype="multipart/form-data">
+            <label for="verify_message">Thông Điệp:</label>
+            <textarea id="verify_message" name="verify_message"></textarea>
+            <label for="file">Hoặc tải lên tệp:</label>
+            <input type="file" name="file" id="file" />
+            <label for="signature_to_verify">Nhập Chữ Ký:</label>
+            <textarea
+              id="signature_to_verify"
+              name="signature_to_verify"
+            ></textarea>
+            <label for="signature_file">Hoặc tải lên tệp Chữ Ký:</label>
+            <input type="file" name="signature_file" id="signature_file" />
+            <button type="submit">Kiểm Tra Chữ Ký</button>
+          </form>
+          <div>
+            <h3>Kết Quả Kiểm Tra:</h3>
+            <textarea readonly>{{ verification_result }}</textarea>
+          </div>
+        </div>
+      </div>
+      <h1>Mã hóa</h1>
+      <div class="row">
+        <!-- Phần Mã Hóa -->
+        <div class="column" style="background-color: #d7aefb">
+          <h2>Người gửi mã hóa</h2>
+          <div>
+            <h3>Khóa Công Khai:</h3>
+            <textarea readonly>{{ public_key }}</textarea>
+          </div>
+          <form action="/encrypt" method="POST" enctype="multipart/form-data">
+            <label for="encrypt_message">Thông Điệp:</label>
+            <textarea id="encrypt_message" name="encrypt_message"></textarea>
+            <label for="encrypt_file">Hoặc tải lên tệp:</label>
+            <input type="file" name="encrypt_file" id="encrypt_file" />
+            <button type="submit">Mã Hóa</button>
+          </form>
+          <div>
+            <h3>Dữ liệu Mã Hóa:</h3>
+            <textarea readonly>{{ ciphertext }}</textarea>
+            <a href="/download/ciphertext.txt" class="download-icon">
+              <i class="fas fa-download"></i> Tải Chữ Mã Hóa
+            </a>
+          </div>
+        </div>
+
+        <!-- Phần Giải Mã -->
+        <div class="column" style="background-color: #ffa726">
+          <h2>Người nhận giải mã</h2>
+          <form action="/decrypt" method="POST" enctype="multipart/form-data">
+            <div>
+              <h3>Khóa Bí Mật:</h3>
+              <textarea readonly>{{ private_key }}</textarea>
+            </div>
+            <label for="decrypt_ciphertext">Chữ Mã Hóa:</label>
+            <textarea
+              id="decrypt_ciphertext"
+              name="decrypt_ciphertext"
+            ></textarea>
+            <label for="decrypt_file">Hoặc tải lên tệp Chữ Mã Hóa:</label>
+            <input type="file" name="decrypt_file" id="decrypt_file" />
+            <button type="submit">Giải Mã</button>
+          </form>
+          <div>
+            <h3>Thông Điệp Giải Mã:</h3>
+            <textarea readonly>{{ decrypted_message }}</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

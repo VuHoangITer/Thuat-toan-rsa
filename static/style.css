@@ -1,0 +1,195 @@
+/* Đặt nền trang web với màu sắc nhẹ nhàng */
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f0f2f5; /* Nền màu xám nhạt */
+  margin: 0;
+  padding: 20px;
+  line-height: 1.6;
+  color: #333; /* Màu chữ chính */
+}
+
+/* Tạo khung chứa trang web với màu sắc và bóng */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff; /* Màu trắng */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bóng mờ nhẹ */
+}
+
+/* Tiêu đề chính của trang */
+h1 {
+  text-align: center;
+  color: #444; /* Màu xám đậm */
+  font-size: 2.5em; /* Tăng kích thước font */
+  margin-bottom: 30px;
+  font-weight: bold; /* In đậm tiêu đề */
+  letter-spacing: 1px; /* Khoảng cách giữa các chữ */
+  text-transform: uppercase; /* Chuyển thành chữ in hoa */
+  background: linear-gradient(90deg, #ff6f61, #de6262); /* Thêm gradient nền */
+  -webkit-background-clip: text;
+  color: transparent; /* Chỉ giữ màu chữ từ gradient */
+}
+
+/* Hàng chứa các cột với khoảng cách phù hợp */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* Định dạng cột chung */
+.column,
+.column-key {
+  flex: 1;
+  min-width: 280px; /* Điều chỉnh cho thiết bị di động */
+  margin: 10px;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Bóng mờ nhẹ hơn */
+}
+
+/* Định dạng riêng cho phần "Khóa" */
+.column-key {
+  flex: 100%;
+  display: flex;
+  justify-content: space-around;
+  background-color: #f28b82; /* Màu nền đỏ nhạt */
+  margin-bottom: 20px;
+}
+
+/* Định dạng các phần bên trong "Khóa" */
+.column-key > div {
+  flex: 1;
+  margin: 0 10px;
+}
+
+/* Tiêu đề phần */
+h2 {
+  color: #555; /* Màu xám nhạt hơn */
+  font-size: 1.75em; /* Tăng kích thước font */
+  margin-bottom: 15px;
+}
+
+/* Định dạng cho textarea và input file */
+textarea,
+input[type="file"] {
+  width: 100%;
+  height: 100px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  resize: none;
+  font-family: monospace;
+  background-color: #f7f7f7; /* Màu nền textarea nhạt */
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1); /* Bóng mờ bên trong */
+}
+
+/* Định dạng cho nút */
+button {
+  background-color: #28a745;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1em;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* Thêm bóng mờ */
+  text-transform: uppercase; /* Chuyển chữ thành in hoa */
+}
+
+/* Hiệu ứng khi di chuột qua nút */
+button:hover {
+  background-color: #218838;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Tăng bóng mờ khi hover */
+}
+
+/* Định dạng cho các đường dẫn */
+a {
+  display: block;
+  margin-top: 10px;
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+/* Hiệu ứng khi di chuột qua đường dẫn */
+a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+/* Định dạng cho nhãn */
+label {
+  font-weight: bold;
+  margin-top: 10px;
+  display: block;
+}
+
+/* Định dạng cho input file */
+input[type="file"] {
+  height: auto;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  padding: 5px;
+  background-color: #e9ecef; /* Màu nền nhạt hơn */
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Định dạng cho các đường dẫn tải về với biểu tượng */
+.download-icon {
+  display: inline-flex;
+  align-items: center;
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 1.1em; /* Tăng kích thước biểu tượng */
+  margin-top: 10px;
+}
+
+.download-icon i {
+  margin-right: 8px; /* Khoảng cách giữa biểu tượng và văn bản */
+  font-size: 1.2em; /* Kích thước biểu tượng */
+}
+
+/* Hiệu ứng khi di chuột qua đường dẫn với biểu tượng */
+.download-icon:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+/* Định dạng cho phần chọn kích thước khóa */
+.select-key-size {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  background-color: #f7f7f7;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1.1em;
+  color: #333;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+/* Hiệu ứng khi di chuột qua ô chọn */
+.select-key-size:hover {
+  border-color: #888;
+}
+
+/* Định dạng cho nhãn chọn kích thước */
+.label-key-size {
+  font-weight: bold;
+  margin-top: 10px;
+  color: #444;
+}
